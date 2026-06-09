@@ -1,0 +1,324 @@
+/* =========================================================================
+   CanchaYa — Hoja de estilos compartida (la importan TODAS las páginas).
+   -------------------------------------------------------------------------
+   MAPA DE RESPONSABILIDADES (para Gustavo / documentación):
+     [FED] Federico Cabrera  — Frontend / HTML  (base, layout, header/footer)
+     [LEA] Leandro Licata    — Frontend / Formularios
+     [GON] Gonzalo Tapia     — Contenido / UX
+     [GUS] Gustavo Di Paola  — Documentación / Git
+   Cada sección de abajo está etiquetada con la sigla del responsable.
+   ========================================================================= */
+
+
+/* ===== [FED] TOKENS DE DISEÑO =============================================
+   Variables CSS reutilizables. Cambiando un valor acá cambia todo el sitio.
+   Esto ADEMÁS es la guía de estilo que va en el PDF (colores y tipografías). */
+:root {
+  --color-fondo:        #0f1411;  /* fondo principal (verde casi negro) */
+  --color-superficie:   #1a221c;  /* tarjetas y bloques */
+  --color-texto:        #e9f0e8;  /* texto sobre fondo oscuro */
+  --color-texto-suave:  #9bab9c;  /* texto secundario */
+  --color-acento:       #6ee87a;  /* verde césped, color de marca */
+  --color-acento-fuerte:#3fbf52;  /* hover del acento */
+  --color-borde:        #2c3a2e;
+
+  --fuente-titulo: "Anton", sans-serif;    /* títulos */
+  --fuente-texto:  "Archivo", sans-serif;  /* texto */
+
+  --radio:   12px;
+  --sombra:  0 8px 24px rgba(0, 0, 0, .35);
+  --ancho-max: 1100px;
+}
+
+/* ===== [FED] RESET Y BASE =================================================
+   Emparejamos los márgenes por defecto del navegador para arrancar de cero. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* el padding no agranda el ancho del elemento */
+}
+body {
+  font-family: var(--fuente-texto);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+/* ===== [FED] CONTENEDOR ===================================================
+   Clase reutilizable que centra el contenido y le da un ancho máximo. */
+.contenedor {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ===== [FED] HEADER Y NAVEGACIÓN ==========================================
+   Estructura común a todas las páginas: logo a la izquierda, menú a la der. */
+.cabecera {
+  background-color: var(--color-superficie);
+  border-bottom: 1px solid var(--color-borde);
+  position: sticky;  /* queda fija arriba al hacer scroll */
+  top: 0;
+  z-index: 10;
+}
+.cabecera .contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+.logo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.6rem;
+  letter-spacing: .5px;
+  color: var(--color-texto);
+  text-decoration: none;
+}
+.logo span { color: var(--color-acento); }
+
+.menu {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+}
+.menu a {
+  color: var(--color-texto-suave);
+  text-decoration: none;
+  font-weight: 600;
+  padding: .4rem 0;
+  transition: color .2s ease;
+}
+.menu a:hover { color: var(--color-acento); }  /* :hover pedido por rúbrica */
+
+/* [GON] Decisión de UX: resaltar la página en la que estás parado. */
+.menu a.activo {
+  color: var(--color-acento);
+  border-bottom: 2px solid var(--color-acento);
+}
+
+/* ===== [FED] BOTONES ======================================================
+   Botón primario y secundario = componentes de la guía de estilo. */
+.boton {
+  display: inline-block;
+  font-family: var(--fuente-texto);
+  font-weight: 700;
+  padding: .8rem 1.6rem;
+  border-radius: var(--radio);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, background-color .2s ease;
+}
+.boton-primario { background-color: var(--color-acento); color: var(--color-fondo); }
+.boton-primario:hover {
+  background-color: var(--color-acento-fuerte);
+  transform: translateY(-2px);
+}
+.boton-secundario {
+  background-color: transparent;
+  color: var(--color-acento);
+  border-color: var(--color-acento);
+}
+.boton-secundario:hover { background-color: var(--color-acento); color: var(--color-fondo); }
+
+/* ===== [FED] FOOTER =======================================================
+   Pie común a todas las páginas. */
+.pie {
+  background-color: var(--color-superficie);
+  border-top: 1px solid var(--color-borde);
+  margin-top: 4rem;
+  padding: 2rem 0;
+  color: var(--color-texto-suave);
+  font-size: .9rem;
+}
+.pie .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* ===== [FED + GON] PÁGINA DE INICIO =======================================
+   [FED] arma el layout del hero; [GON] define el contenido/mensajes. */
+.hero { padding: 5rem 0; text-align: center; }
+.hero h1 {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2.5rem, 6vw, 4.5rem); /* escala según el ancho de pantalla */
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--color-acento); }
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: var(--color-texto-suave);
+  font-size: 1.15rem;
+}
+.hero-acciones { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* [GON] Sección "cómo funciona": 3 pasos en tarjetas. */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 0 1rem;
+}
+.tarjeta {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 2rem;
+}
+.tarjeta .numero { font-family: var(--fuente-titulo); font-size: 2rem; color: var(--color-acento); }
+.tarjeta h3 { margin: .5rem 0; }
+.tarjeta p { color: var(--color-texto-suave); }
+
+/* ===== [FED] ENCABEZADO DE PÁGINAS INTERNAS =============================== */
+.encabezado-pagina { padding: 3rem 0 1rem; text-align: center; }
+.encabezado-pagina h1 {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+.encabezado-pagina h1 span { color: var(--color-acento); }
+.encabezado-pagina p {
+  color: var(--color-texto-suave);
+  max-width: 600px;
+  margin: .5rem auto 0;
+}
+
+/* ===== [LEA] FORMULARIO DE RESERVA ========================================
+   Estilos de los controles + estados :hover y :focus. */
+.formulario {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 2rem;
+  max-width: 640px;
+  margin: 2rem auto;
+  box-shadow: var(--sombra);
+}
+.campo { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+.campo label { font-weight: 600; margin-bottom: .4rem; }
+.campo input,
+.campo select,
+.campo textarea {
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  padding: .7rem .9rem;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+/* :hover en input/select/textarea lo pide la rúbrica */
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover { border-color: var(--color-texto-suave); }
+/* :focus = cuando el campo está seleccionado (mejora la UX) */
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(110, 232, 122, .15);
+}
+.fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.formulario .boton { width: 100%; font-size: 1.05rem; }
+
+/* ===== [GON] LISTADO DE COMPLEJOS ========================================= */
+.grilla-complejos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+.complejo {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.complejo:hover { transform: translateY(-4px); border-color: var(--color-acento); }
+.complejo .foto {
+  height: 150px;
+  background: linear-gradient(135deg, var(--color-acento-fuerte), var(--color-fondo));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fuente-titulo); font-size: 2.5rem; color: var(--color-fondo);
+}
+.complejo .info { padding: 1.25rem; }
+.complejo h3 { margin-bottom: .3rem; }
+.complejo .dato { color: var(--color-texto-suave); font-size: .9rem; }
+.complejo .precio { color: var(--color-acento); font-weight: 700; margin-top: .6rem; }
+
+/* ===== [GON] EQUIPO (página Nosotros) ===================================== */
+.grilla-equipo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+.miembro {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  text-align: center;
+}
+.miembro .avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  margin: 0 auto 1rem;
+  background-color: var(--color-acento); color: var(--color-fondo);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fuente-titulo); font-size: 1.8rem;
+}
+.miembro h3 { margin-bottom: .2rem; }
+.miembro .rol { color: var(--color-acento); font-size: .9rem; font-weight: 600; }
+.miembro p { color: var(--color-texto-suave); font-size: .9rem; margin-top: .5rem; }
+
+/* ===== [FED] ANIMACIÓN DE ENTRADA =========================================
+   El hero aparece en cascada al cargar la página. */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1       { animation: aparecer .6s ease both; }
+.hero p        { animation: aparecer .6s ease .15s both; }
+.hero-acciones { animation: aparecer .6s ease .30s both; }
+
+/* ===== [FED] BOTÓN HAMBURGUESA (implementación) ===========================
+   [GON] aporta la decisión de UX de tener menú colapsable en móvil. */
+.hamburguesa {
+  display: none;  /* oculto en escritorio */
+  background: none; border: none;
+  color: var(--color-texto);
+  font-size: 1.8rem; cursor: pointer;
+  transition: color .2s ease;
+}
+.hamburguesa:hover { color: var(--color-acento); }
+
+/* ===== [FED + GON] RESPONSIVE ============================================= */
+@media (max-width: 900px) {
+  .grilla-equipo    { grid-template-columns: repeat(2, 1fr); }
+  .grilla-complejos { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .tarjetas { grid-template-columns: 1fr; }
+  /* Menú móvil: el botón aparece y el menú se vuelve panel desplegable */
+  .hamburguesa { display: block; }
+  .menu {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background-color: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+    padding: 1rem 1.25rem; gap: 1rem;
+  }
+  .menu.abierto { display: flex; } /* el JS agrega esta clase al hacer clic */
+}
+@media (max-width: 600px) {
+  .fila { grid-template-columns: 1fr; }
+  .grilla-equipo,
+  .grilla-complejos { grid-template-columns: 1fr; }
+}

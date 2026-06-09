@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!-- =========================================================================
+     PÁGINA: Complejos (complejos.html)
+     RESPONSABLE: [GON] Gonzalo Tapia — Contenido / UX
+     QUÉ HACE: listado de complejos ficticios en tarjetas. Contenido y orden
+     visual son decisión de UX. La estructura común es de [FED] Federico.
+     ========================================================================= -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- [GUS] meta author -->
+  <meta name="author" content="Gonzalo Tapia">
+  <meta name="description" content="Complejos de fútbol 5 disponibles en CanchaYa.">
+  <title>Complejos — CanchaYa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+  <!-- [FED] HEADER común -->
+  <header class="cabecera">
+    <div class="contenedor">
+      <a href="index.html" class="logo">Cancha<span>Ya</span></a>
+      <button class="hamburguesa" aria-label="Abrir menú">&#9776;</button>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="reservar.html">Reservar</a></li>
+          <li><a href="complejos.html" class="activo">Complejos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="encabezado-pagina">
+      <div class="contenedor">
+        <h1>Nuestros <span>complejos</span></h1>
+        <p>Canchas habilitadas en el Gran Mendoza. Pasá el mouse por encima.</p>
+      </div>
+    </section>
+
+    <!-- [GON] grilla de complejos (contenido ficticio) -->
+    <section class="contenedor">
+      <div class="grilla-complejos">
+
+        <article class="complejo">
+          <div class="foto">⚽</div>
+          <div class="info">
+            <h3>Estadio 5</h3>
+            <p class="dato">Godoy Cruz · 3 canchas sintéticas</p>
+            <p class="precio">$ 18.000 / hora</p>
+          </div>
+        </article>
+
+        <article class="complejo">
+          <div class="foto">⚽</div>
+          <div class="info">
+            <h3>La Redonda</h3>
+            <p class="dato">Las Heras · 2 canchas techadas</p>
+            <p class="precio">$ 20.000 / hora</p>
+          </div>
+        </article>
+
+        <article class="complejo">
+          <div class="foto">⚽</div>
+          <div class="info">
+            <h3>Golazo Fútbol</h3>
+            <p class="dato">Guaymallén · 4 canchas + parrillas</p>
+            <p class="precio">$ 17.500 / hora</p>
+          </div>
+        </article>
+
+        <article class="complejo">
+          <div class="foto">⚽</div>
+          <div class="info">
+            <h3>El Potrero</h3>
+            <p class="dato">Ciudad · 2 canchas al aire libre</p>
+            <p class="precio">$ 15.000 / hora</p>
+          </div>
+        </article>
+
+        <article class="complejo">
+          <div class="foto">⚽</div>
+          <div class="info">
+            <h3>Mundial F5</h3>
+            <p class="dato">Maipú · 3 canchas con vestuarios</p>
+            <p class="precio">$ 19.000 / hora</p>
+          </div>
+        </article>
+
+        <article class="complejo">
+          <div class="foto">⚽</div>
+          <div class="info">
+            <h3>La Bombonerita</h3>
+            <p class="dato">Luján · 2 canchas iluminadas</p>
+            <p class="precio">$ 16.500 / hora</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- [FED] FOOTER común -->
+  <footer class="pie">
+    <div class="contenedor">
+      <span>© 2026 CanchaYa — Proyecto académico ficticio.</span>
+      <span>Práctica Profesional I — Instituto Superior Manuel Belgrano</span>
+    </div>
+  </footer>
+
+  <script src="js/menu.js"></script>
+</body>
+</html>

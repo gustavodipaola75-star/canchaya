@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- =========================================================================
+     PÁGINA: Inicio (index.html)
+     RESPONSABLE: [FED] Federico Cabrera — Frontend / HTML
+     QUÉ HACE: estructura semántica base, header y footer comunes, y el "hero"
+               de bienvenida. El contenido/mensajes los define [GON] Gonzalo.
+     ========================================================================= -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">                                  <!-- acentos y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsive -->
+  <!-- [GUS] meta author: autoría de esta página (requisito de rúbrica) -->
+  <meta name="author" content="Federico Cabrera">
+  <meta name="description" content="CanchaYa: reservá tu cancha de fútbol 5 en Mendoza en segundos.">
+  <title>CanchaYa — Reservá tu cancha en segundos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+  <!-- [FED] HEADER común (se repite igual en las 4 páginas) -->
+  <header class="cabecera">
+    <div class="contenedor">
+      <a href="index.html" class="logo">Cancha<span>Ya</span></a>
+      <!-- [FED] botón hamburguesa: solo visible en móvil (ver CSS) -->
+      <button class="hamburguesa" aria-label="Abrir menú">&#9776;</button>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html" class="activo">Inicio</a></li>
+          <li><a href="reservar.html">Reservar</a></li>
+          <li><a href="complejos.html">Complejos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- [FED] estructura del hero | [GON] textos del hero -->
+    <section class="hero">
+      <div class="contenedor">
+        <h1>Encontrá cancha libre <span>hoy mismo</span></h1>
+        <p>
+          Buscá complejos cerca tuyo, mirá horarios disponibles y reservá
+          tu partido de fútbol 5 sin llamadas ni vueltas.
+        </p>
+        <div class="hero-acciones">
+          <a href="reservar.html" class="boton boton-primario">Reservar ahora</a>
+          <a href="nosotros.html" class="boton boton-secundario">Conocé el equipo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- [GON] sección "cómo funciona" en 3 pasos -->
+    <section class="contenedor">
+      <div class="tarjetas">
+        <article class="tarjeta">
+          <div class="numero">01</div>
+          <h3>Buscá</h3>
+          <p>Elegí zona, día y horario. Te mostramos las canchas disponibles al instante.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="numero">02</div>
+          <h3>Reservá</h3>
+          <p>Confirmás el turno desde el celular. Sin esperar que te atiendan por teléfono.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="numero">03</div>
+          <h3>Jugá</h3>
+          <p>Llegás, jugás y listo. Recibís el recordatorio antes del partido.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- [FED] FOOTER común -->
+  <footer class="pie">
+    <div class="contenedor">
+      <span>© 2026 CanchaYa — Proyecto académico ficticio.</span>
+      <span>Práctica Profesional I — Instituto Superior Manuel Belgrano</span>
+    </div>
+  </footer>
+
+  <!-- [FED] script del menú hamburguesa -->
+  <script src="js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- =========================================================================
+     PÁGINA: Reservar (reservar.html)
+     RESPONSABLE: [LEA] Leandro Licata — Frontend / Formularios
+     QUÉ HACE: formulario de reserva con validación nativa de HTML5 (sin JS).
+     El header/footer son la estructura común de [FED] Federico.
+     ========================================================================= -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- [GUS] meta author -->
+  <meta name="author" content="Leandro Licata">
+  <meta name="description" content="Reservá tu cancha de fútbol 5 en CanchaYa.">
+  <title>Reservar — CanchaYa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+  <!-- [FED] HEADER común -->
+  <header class="cabecera">
+    <div class="contenedor">
+      <a href="index.html" class="logo">Cancha<span>Ya</span></a>
+      <button class="hamburguesa" aria-label="Abrir menú">&#9776;</button>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="reservar.html" class="activo">Reservar</a></li>
+          <li><a href="complejos.html">Complejos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="encabezado-pagina">
+      <div class="contenedor">
+        <h1>Reservá tu <span>cancha</span></h1>
+        <p>Completá los datos y te confirmamos el turno al instante.</p>
+      </div>
+    </section>
+
+    <!-- [LEA] FORMULARIO con validación HTML5.
+         required = obligatorio | type=email valida formato | min/max acotan
+         valores | minlength exige largo mínimo. El navegador muestra los errores. -->
+    <section class="contenedor">
+      <form class="formulario" action="#" method="post">
+
+        <div class="campo">
+          <label for="nombre">Nombre y apellido</label>
+          <input type="text" id="nombre" name="nombre"
+                 placeholder="Ej: Lionel Pérez" required minlength="3">
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email"
+                   placeholder="vos@ejemplo.com" required>
+          </div>
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono"
+                   placeholder="261 123 4567" required>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="complejo">Complejo</label>
+          <select id="complejo" name="complejo" required>
+            <option value="">— Elegí un complejo —</option>
+            <option value="estadio5">Estadio 5 (Godoy Cruz)</option>
+            <option value="laredonda">La Redonda (Las Heras)</option>
+            <option value="golazo">Golazo Fútbol (Guaymallén)</option>
+          </select>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div class="campo">
+            <label for="hora">Horario</label>
+            <select id="hora" name="hora" required>
+              <option value="">— Elegí un horario —</option>
+              <option>18:00</option>
+              <option>19:00</option>
+              <option>20:00</option>
+              <option>21:00</option>
+              <option>22:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="jugadores">Cantidad de jugadores</label>
+          <input type="number" id="jugadores" name="jugadores"
+                 min="2" max="14" value="10" required>
+        </div>
+
+        <div class="campo">
+          <label for="comentarios">Comentarios (opcional)</label>
+          <textarea id="comentarios" name="comentarios" rows="3"
+                    placeholder="Ej: necesitamos pecheras"></textarea>
+        </div>
+
+        <button type="submit" class="boton boton-primario">Confirmar reserva</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- [FED] FOOTER común -->
+  <footer class="pie">
+    <div class="contenedor">
+      <span>© 2026 CanchaYa — Proyecto académico ficticio.</span>
+      <span>Práctica Profesional I — Instituto Superior Manuel Belgrano</span>
+    </div>
+  </footer>
+
+  <script src="js/menu.js"></script>
+</body>
+</html>
