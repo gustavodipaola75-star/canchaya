@@ -42,6 +42,12 @@ body {
   background-color: var(--color-fondo);
   color: var(--color-texto);
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
 }
 
 /* ===== [FED] CONTENEDOR ===================================================
@@ -138,9 +144,20 @@ body {
   gap: 1rem;
 }
 
-/* ===== [FED + GON] PÁGINA DE INICIO =======================================
+/* [FED + GON] PÁGINA DE INICIO =======================================
    [FED] arma el layout del hero; [GON] define el contenido/mensajes. */
-.hero { padding: 5rem 0; text-align: center; }
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(15, 20, 17, .75), rgba(15, 20, 17, .85)), url("https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1600&q=80") center/cover;
+    color: var(--color-texto);
+}
+.hero-contenido {
+    max-width: 700px;
+}
 .hero h1 {
   font-family: var(--fuente-titulo);
   font-size: clamp(2.5rem, 6vw, 4.5rem); /* escala según el ancho de pantalla */
@@ -223,6 +240,13 @@ body {
   border-color: var(--color-acento);
   box-shadow: 0 0 0 3px rgba(110, 232, 122, .15);
 }
+
+/* Ajuste para iconos de fecha/tiempo en modo oscuro */
+.campo input[type="date"]::-webkit-calendar-picker-indicator,
+.campo input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
 .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 .formulario .boton { width: 100%; font-size: 1.05rem; }
 
@@ -295,6 +319,7 @@ body {
   color: var(--color-texto);
   font-size: 1.8rem; cursor: pointer;
   transition: color .2s ease;
+  margin-left: auto;
 }
 .hamburguesa:hover { color: var(--color-acento); }
 
