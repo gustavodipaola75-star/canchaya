@@ -152,7 +152,7 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(rgba(15, 20, 17, .75), rgba(15, 20, 17, .85)), url("https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1600&q=80") center/cover;
+    background: linear-gradient(rgba(15, 20, 17, .75), rgba(15, 20, 17, .85)), url("../assets/images/hero.jpg") center/cover;
     color: var(--color-texto);
 }
 .hero-contenido {
@@ -271,10 +271,12 @@ main {
   display: flex; align-items: center; justify-content: center;
   font-family: var(--fuente-titulo); font-size: 2.5rem; color: var(--color-fondo);
 }
+.complejo img.foto { width: 100%; object-fit: cover; display: block; }
 .complejo .info { padding: 1.25rem; }
 .complejo h3 { margin-bottom: .3rem; }
 .complejo .dato { color: var(--color-texto-suave); font-size: .9rem; }
 .complejo .precio { color: var(--color-acento); font-weight: 700; margin-top: .6rem; }
+.complejo .info .boton { margin-top: 1rem; width: 100%; text-align: center; }
 
 /* ===== [GON] EQUIPO (página Nosotros) ===================================== */
 .grilla-equipo {
@@ -297,6 +299,7 @@ main {
   display: flex; align-items: center; justify-content: center;
   font-family: var(--fuente-titulo); font-size: 1.8rem;
 }
+.miembro img.avatar { object-fit: cover; }
 .miembro h3 { margin-bottom: .2rem; }
 .miembro .rol { color: var(--color-acento); font-size: .9rem; font-weight: 600; }
 .miembro p { color: var(--color-texto-suave); font-size: .9rem; margin-top: .5rem; }
