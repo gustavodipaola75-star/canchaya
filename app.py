@@ -22,12 +22,12 @@ from seguridad import iniciar_seguridad   # [GUS] CSRF, CSP, limiter...
 
 app = Flask(__name__)
 
-iniciar_seguridad(app)
-
 # La clave firma la cookie de sesión y los tokens CSRF. En Render se carga
 # como variable de entorno SECRET_KEY. Si falta (en la PC de cada uno), se
 # genera una al azar: funciona igual, pero las sesiones se pierden al reiniciar.
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
+
+iniciar_seguridad(app)
 
 iniciar_base()
 app.register_blueprint(api)
