@@ -1,8 +1,11 @@
 {# =========================================================================
    PÁGINA: Complejos (complejos.html)
    RESPONSABLE: [GON] Gonzalo Tapia — Contenido / UX
-   QUÉ HACE: listado de complejos ficticios en tarjetas. Contenido y orden
-   visual son decisión de UX. La estructura común es de [FED] Federico.
+   QUÉ HACE: listado de complejos en tarjetas. Los datos vienen de la base
+   (modelos.py, [LEA]): la ruta /complejos pasa la lista "complejos" y acá
+   se arma una tarjeta por cada uno. Arriba va el buscador con filtros; los
+   data-* de cada tarjeta los usa buscador.js para filtrar y ordenar.
+   La estructura común es de [FED] Federico.
    ========================================================================= #}
 {% extends "base.html" %}
 
@@ -18,70 +21,77 @@
       </div>
     </section>
 
-    <!-- [GON] grilla de complejos (contenido ficticio) -->
     <section class="contenedor">
+
+      {# [GON] Buscador y filtros. La lógica está en js/buscador.js. #}
+      {% set precios = complejos|map(attribute='precio_hora')|list %}
+      {# El rango va de a 500: redondeamos el mínimo para abajo y el máximo para
+      arriba, así todos los precios entran en un paso y nadie queda oculto. #}
+      {% set precio_min = (precios|min // 500) * 500 %}
+      {% set precio_max = ((precios|max + 499) // 500) * 500 %}
+      <form class="buscador" id="buscador" role="search">
+
+        <div class="campo buscador-texto">
+          <label for="filtro-texto">Buscar</label>
+          <div class="buscador-entrada">
+            <input type="search" id="filtro-texto" placeholder="Nombre o característica (ej: techadas)" autocomplete="off">
+            <button type="button" class="boton-voz" id="boton-voz" aria-label="Buscar por voz" hidden>🎤</button>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="filtro-zona">Zona</label>
+          <select id="filtro-zona">
+            <option value="">Todas</option>
+            {% for zona in complejos|map(attribute='zona')|unique|sort %}
+            <option value="{{ zona }}">{{ zona }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="filtro-precio">Hasta $ <output id="valor-precio" for="filtro-precio">{{ "{:,}".format(precio_max).replace(",", ".") }}</output></label>
+          <input type="range" id="filtro-precio" min="{{ precio_min }}" max="{{ precio_max }}" step="500" value="{{ precio_max }}">
+        </div>
+
+        <div class="campo">
+          <label for="filtro-orden">Ordenar</label>
+          <select id="filtro-orden">
+            <option value="">Sin orden</option>
+            <option value="menor">Menor precio</option>
+            <option value="mayor">Mayor precio</option>
+          </select>
+        </div>
+
+      </form>
+      <p class="buscador-resumen" id="resumen" aria-live="polite"></p>
+
+      <!-- [GON] grilla de complejos: una tarjeta por cada complejo de la base -->
       <div class="grilla-complejos">
 
-        <article class="complejo">
-          <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/cancha1.jpg') }}" alt="Cancha sintética de Estadio 5">
-          <div class="info">
-            <h3>Estadio 5</h3>
-            <p class="dato">Godoy Cruz · 3 canchas sintéticas</p>
-            <p class="precio">$ 18.000 / hora</p>
-            <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
-          </div>
-        </article>
-
-        <article class="complejo">
-          <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/cancha2.jpg') }}" alt="Cancha techada de La Redonda">
-          <div class="info">
-            <h3>La Redonda</h3>
-            <p class="dato">Las Heras · 2 canchas techadas</p>
-            <p class="precio">$ 20.000 / hora</p>
-            <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
-          </div>
-        </article>
-
-        <article class="complejo">
-          <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/cancha3.jpg') }}" alt="Cancha de Golazo Fútbol">
-          <div class="info">
-            <h3>Golazo Fútbol</h3>
-            <p class="dato">Guaymallén · 4 canchas + parrillas</p>
-            <p class="precio">$ 17.500 / hora</p>
-            <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
-          </div>
-        </article>
-
-        <article class="complejo">
-          <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/cancha4.jpg') }}" alt="Cancha al aire libre de El Potrero">
-          <div class="info">
-            <h3>El Potrero</h3>
-            <p class="dato">Ciudad · 2 canchas al aire libre</p>
-            <p class="precio">$ 15.000 / hora</p>
-            <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
-          </div>
-        </article>
-
-        <article class="complejo">
-          <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/cancha5.jpg') }}" alt="Cancha con vestuarios de Mundial F5">
-          <div class="info">
-            <h3>Mundial F5</h3>
-            <p class="dato">Maipú · 3 canchas con vestuarios</p>
-            <p class="precio">$ 19.000 / hora</p>
-            <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
-          </div>
-        </article>
-
-        <article class="complejo">
-          <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/cancha6.jpg') }}" alt="Cancha iluminada de La Bombonerita">
-          <div class="info">
-            <h3>La Bombonerita</h3>
-            <p class="dato">Luján · 2 canchas iluminadas</p>
-            <p class="precio">$ 16.500 / hora</p>
-            <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
-          </div>
-        </article>
+        {% for complejo in complejos %}
+          <article class="complejo"
+                   data-nombre="{{ complejo.nombre }}"
+                   data-zona="{{ complejo.zona }}"
+                   data-precio="{{ complejo.precio_hora }}"
+                   data-caracteristicas="{{ complejo.caracteristicas }}">
+            <img class="foto" src="{{ url_for('static', filename='assets/images/canchas/' ~ complejo.imagen) }}" alt="Cancha {{ complejo.caracteristicas }} de {{ complejo.nombre }}">
+            <div class="info">
+              <h3>{{ complejo.nombre }}</h3>
+              <p class="dato">{{ complejo.zona }} · {{ complejo.cantidad_canchas }} canchas {{ complejo.caracteristicas }}</p>
+              <p class="precio">$ {{ "{:,}".format(complejo.precio_hora).replace(",", ".") }} / hora</p>
+              <a class="boton boton-primario" href="{{ url_for('reservar') }}">Reservar</a>
+            </div>
+          </article>
+        {% endfor %}
 
       </div>
+
+      <p class="sin-resultados" id="sin-resultados" hidden>No hay complejos con esos filtros. Probá con otra zona o subí el precio.</p>
+
     </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/buscador.js') }}"></script>
 {% endblock %}

@@ -421,3 +421,63 @@ main {
   .grilla-equipo,
   .grilla-complejos { grid-template-columns: 1fr; }
 }
+/* ===== [GON] BUSCADOR Y FILTROS DE COMPLEJOS ==============================
+   Barra arriba de la grilla. La lógica está en js/buscador.js.
+   Reusa .campo de [LEA] para que los controles se vean como el resto. */
+.buscador {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+  align-items: end;
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+  margin-top: 2rem;
+}
+.buscador .campo { margin-bottom: 0; }
+.buscador-entrada { display: flex; gap: .5rem; }
+.buscador-entrada input { flex: 1; min-width: 0; }
+
+.buscador .campo input[type="range"] {
+  padding: 0;
+  background: none;
+  border: none;
+  accent-color: var(--color-acento);
+  height: 2.6rem;
+}
+.buscador output { color: var(--color-acento); }
+
+.boton-voz {
+  padding: 0 .9rem;
+  font-size: 1.1rem;
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.boton-voz:hover { border-color: var(--color-acento); }
+/* Mientras escucha (la clase la pone buscador.js) */
+.boton-voz.escuchando {
+  border-color: var(--color-peligro);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, .2);
+}
+
+.buscador-resumen { color: var(--color-texto-suave); margin: 1rem 0 0; }
+.sin-resultados {
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--color-aviso);
+  border-radius: var(--radio);
+  color: var(--color-aviso);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .buscador { grid-template-columns: 1fr 1fr; }
+  .buscador-texto { grid-column: 1 / -1; }  /* el buscador ocupa toda la fila */
+}
+@media (max-width: 600px) {
+  .buscador { grid-template-columns: 1fr; }
+}
