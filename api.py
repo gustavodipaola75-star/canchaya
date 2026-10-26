@@ -20,8 +20,13 @@ from modelos import (
     db, Complejo, Reserva, CONFIRMADA, EN_ESPERA,
     horarios_del_dia, horarios_libres, validar_fecha_reservable,
 )
+from seguridad import limiter   # [GUS] límite de intentos
 
 api = Blueprint("api", __name__, url_prefix="/api")
+
+# Más que suficiente para una persona y corta a quien intente llenar los
+# turnos con un script. Al pasarlo, seguridad.py responde 429 en JSON.
+LIMITE_RESERVAS = "10 per minute"
 
 PATRON_EMAIL = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 MIN_JUGADORES, MAX_JUGADORES = 2, 14
@@ -99,6 +104,7 @@ def ver_disponibilidad(id_complejo):
 
 
 @api.post("/reservas")
+@limiter.limit(LIMITE_RESERVAS)
 def crear_reserva():
     datos = request.get_json(silent=True)
     if not isinstance(datos, dict):
