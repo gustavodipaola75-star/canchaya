@@ -91,8 +91,7 @@ Se aplican con `@limiter.limit(...)` debajo del decorador de cada ruta:
 | `POST /registro` | 3 por minuto |
 | `POST /api/reservas` | 10 por minuto |
 
-Al superar el límite, el sitio responde con un error 429: JSON para las rutas de `/api` y
-un mensaje ("Demasiados intentos, esperá un minuto") para el resto de las páginas.
+Al superar el límite, las rutas de /api responden con un error 429 en JSON. En el resto de las páginas (/login y /registro) el sitio vuelve a la página anterior y muestra el mensaje “Demasiados intentos, esperá un minuto”. El límite se cuenta por IP y solo en los pedidos POST, así que mirar o recargar el formulario no gasta intentos.
 
 ### Errores de seguridad
 
@@ -109,7 +108,8 @@ un mensaje ("Demasiados intentos, esperá un minuto") para el resto de las pági
 | CSP | Revisión de la consola (F12) en todas las páginas, con y sin sesión | Sin errores de Content Security Policy |
 | Clickjacking | Un `.html` suelto con `<iframe src="http://localhost:5000">` | El navegador se niega a mostrar el sitio |
 | CSRF | Cambiar el `csrf_token` del login y borrar el `<meta name="csrf-token">` en `/reservar` | Mensaje de error en ambos casos |
-| Fuerza bruta | 6 logins fallidos seguidos | Mensaje de demasiados intentos (429) |
+| Fuerza bruta | 6 logins fallidos seguidos en /login | Los primeros 5 muestran “Email o contraseña incorrectos” y el 6º muestra “Demasiados intentos, esperá un minuto” |
+| Fuerza bruta | 4 registros inválidos seguidos en /registro | Los primeros 3 muestran “Las contraseñas no coinciden” y el 4º muestra el mensaje de bloqueo |
 | XSS | Registrarse con el nombre `<script>alert(1)</script>` | Se muestra como texto, sin ejecutarse |
 | Sesiones | Reservar y verla en Mis reservas; salir y entrar a `/mis-reservas` | Pide iniciar sesión |
 | Búsqueda por voz | Usar el micrófono con la cabecera `Permissions-Policy` activa | Sigue funcionando |

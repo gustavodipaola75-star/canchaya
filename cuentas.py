@@ -23,6 +23,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms.validators import ValidationError
 
 from modelos import Usuario
+from seguridad import limiter
 
 cuentas = Blueprint("cuentas", __name__)
 
@@ -70,6 +71,7 @@ def iniciar_sesion(usuario):
 
 
 @cuentas.route("/registro", methods=["GET", "POST"])
+@limiter.limit("3 per minute", methods=["POST"])
 def registro():
     if g.usuario:
         return redirect(url_for("inicio"))
@@ -106,6 +108,7 @@ def registro():
 
 
 @cuentas.route("/login", methods=["GET", "POST"])
+@limiter.limit("5 per minute", methods=["POST"])
 def login():
     if g.usuario:
         return redirect(url_for("inicio"))
